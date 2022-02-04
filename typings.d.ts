@@ -1,6 +1,19 @@
 export interface HomePostType {
-    id: string
-    image: string
+    _id: string
+    _createdAt: string
+    author: {
+        name: string
+        image: string
+    }
+    description: string
+    mainImage: {
+        asset: {
+            url: string
+        }
+    }
+    slug: {
+        current: string
+    }
     title: string
-    author: string
+    body: [object]
 }
