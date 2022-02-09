@@ -2,22 +2,34 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories'
 import MusicNoteIcon from '@mui/icons-material/MusicNote'
 import HourglassFullIcon from '@mui/icons-material/HourglassFull'
 import BannerImage from '../public/banner.png'
+import { useRouter } from 'next/router'
 
 const BottomNav = () => {
+    const router = useRouter()
+
     return (
         <div className="mx-auto flex max-w-6xl flex-col items-center">
             <div className="mt-4 flex w-full items-center justify-around space-x-6 px-4">
-                <div className="bottomNavStyles">
+                <div
+                    className="bottomNavStyles"
+                    onClick={() => router.push('/post')}
+                >
                     <AutoStoriesIcon />
                     <p>Stories</p>
                 </div>
 
-                <div className="bottomNavStyles">
+                <div
+                    className="bottomNavStyles"
+                    onClick={() => router.push('/poems')}
+                >
                     <MusicNoteIcon />
                     <p>Poems</p>
                 </div>
 
-                <div className="bottomNavStyles">
+                <div
+                    className="bottomNavStyles"
+                    onClick={() => router.push('/history')}
+                >
                     <HourglassFullIcon />
                     <p>History</p>
                 </div>
