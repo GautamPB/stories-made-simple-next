@@ -3,6 +3,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote'
 import HourglassFullIcon from '@mui/icons-material/HourglassFull'
 import BannerImage from '../public/banner.png'
 import { useRouter } from 'next/router'
+import RateReviewIcon from '@mui/icons-material/RateReview'
 
 const BottomNav = () => {
     const router = useRouter()
@@ -14,7 +15,7 @@ const BottomNav = () => {
                     className="bottomNavStyles"
                     onClick={() => router.push('/post')}
                 >
-                    <AutoStoriesIcon />
+                    <AutoStoriesIcon className="hidden md:inline-flex" />{' '}
                     <p>Stories</p>
                 </div>
 
@@ -22,7 +23,7 @@ const BottomNav = () => {
                     className="bottomNavStyles"
                     onClick={() => router.push('/poems')}
                 >
-                    <MusicNoteIcon />
+                    <MusicNoteIcon className="hidden md:inline-flex" />{' '}
                     <p>Poems</p>
                 </div>
 
@@ -30,8 +31,16 @@ const BottomNav = () => {
                     className="bottomNavStyles"
                     onClick={() => router.push('/history')}
                 >
-                    <HourglassFullIcon />
+                    <HourglassFullIcon className="hidden md:inline-flex" />{' '}
                     <p>History</p>
+                </div>
+
+                <div
+                    className="bottomNavStyles"
+                    onClick={() => router.push('/reviews')}
+                >
+                    <RateReviewIcon className="hidden md:inline-flex" />{' '}
+                    <p>Reviews</p>
                 </div>
             </div>
 

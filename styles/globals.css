@@ -4,6 +4,6 @@
 
 @layer components {
     .bottomNavStyles {
-        @apply flex w-full cursor-pointer items-center justify-center space-x-2 rounded-full bg-[#0EBFE9] py-2 font-semibold text-white shadow-lg transition hover:scale-105;
+        @apply flex w-full cursor-pointer items-center justify-center rounded-full bg-[#0EBFE9] py-2 font-semibold text-white shadow-lg transition hover:scale-105 md:space-x-2;
     }
 }

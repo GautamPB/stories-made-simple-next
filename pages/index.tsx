@@ -22,13 +22,6 @@ export default function Home({ posts }: Props) {
 
             <div className="mx-auto mt-5 max-w-[95vw]">
                 <div className="grid grid-cols-1 p-4 md:grid-cols-2 lg:grid-cols-3">
-                    {/* <HomePost />
-                    <HomePost />
-                    <HomePost />
-                    <HomePost />
-                    <HomePost />
-                    <HomePost /> */}
-
                     {posts.map((postObj) => (
                         <HomePost post={postObj} />
                     ))}
@@ -41,6 +34,7 @@ export default function Home({ posts }: Props) {
 export const getServerSideProps = async () => {
     const query = `* [_type == 'post'] {
         _id,
+        _type,
         _createdAt,
         title,
         slug,

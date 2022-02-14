@@ -1,13 +1,27 @@
 import { HomePostType } from '../typings'
 import { urlFor } from '../sanity'
+import { useRouter } from 'next/router'
 
 interface Props {
     post: HomePostType
 }
 
 export default function HomePost({ post }: Props) {
+    const router = useRouter()
+
     return (
-        <div className="group my-2 mr-5 flex cursor-pointer flex-col items-start justify-center overflow-hidden rounded-lg transition hover:bg-[#e7e7e7]">
+        <div
+            className="group my-2 mr-5 flex cursor-pointer flex-col items-start justify-center overflow-hidden rounded-lg transition hover:bg-[#e7e7e7]"
+            onClick={() =>
+                router.push({
+                    pathname: '/postContent',
+                    query: {
+                        contentType: post._type,
+                        slug: post.slug.current,
+                    },
+                })
+            }
+        >
             <div className="group w-full overflow-hidden rounded-lg border">
                 <img
                     src={urlFor(post.mainImage).url()!}
