@@ -52,6 +52,7 @@ export const getServerSideProps = async (context: {
     const query = `
     * [_type == '${contentType}'] {
     _id,
+    _type,
     _createdAt,
     title,
     slug,
