@@ -18,7 +18,7 @@ export default function Post({ post }: Props) {
 
     const { contentType, slug } = router.query
 
-    const handleCommentSubmit = (e) => {
+    const handleCommentSubmit = (e: any) => {
         e.preventDefault()
         console.log(name, email, comment)
     }
