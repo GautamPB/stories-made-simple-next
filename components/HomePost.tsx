@@ -11,7 +11,7 @@ export default function HomePost({ post }: Props) {
 
     return (
         <div
-            className="group my-2 mr-5 flex cursor-pointer flex-col items-start justify-center overflow-hidden rounded-lg transition hover:bg-[#e7e7e7]"
+            className="group my-2 mr-5 flex cursor-pointer flex-col items-start justify-center overflow-hidden rounded-lg bg-gray-100 p-2 transition hover:shadow-lg"
             onClick={() =>
                 router.push({
                     pathname: '/postContent',
