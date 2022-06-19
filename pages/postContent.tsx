@@ -5,12 +5,16 @@ import { sanityClient, urlFor } from '../sanity'
 import { HomePostType } from '../typings'
 import PortableText from 'react-portable-text'
 import { useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../firebase'
 interface Props {
     post: HomePostType
 }
 
 export default function Post({ post }: Props) {
     const router = useRouter()
+
+    const [user] = useAuthState(auth)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -96,51 +100,61 @@ export default function Post({ post }: Props) {
                         <h1 className="text-base font-bold">
                             Liked the post? <br />
                             <span className="text-3xl font-bold text-blue-500">
-                                Leave a comment!
+                                {user
+                                    ? 'Leave a comment!'
+                                    : 'Login to leave a comment!'}
                             </span>
                         </h1>
 
-                        <form className="flex w-full flex-col space-y-3">
-                            <div className="w-full space-y-2">
-                                <label>Your Name</label>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
-                                    placeholder="Example: John Appleseed"
-                                />
-                            </div>
+                        {user && (
+                            <form className="flex w-full flex-col space-y-3">
+                                <div className="w-full space-y-2">
+                                    <label>Your Name</label>
+                                    <input
+                                        type="text"
+                                        value={name}
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
+                                        placeholder="Example: John Appleseed"
+                                    />
+                                </div>
 
-                            <div className="w-full space-y-2">
-                                <label>Your Email</label>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
-                                    placeholder="Example: johnappleseed@gmail.com"
-                                />
-                            </div>
+                                <div className="w-full space-y-2">
+                                    <label>Your Email</label>
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
+                                        placeholder="Example: johnappleseed@gmail.com"
+                                    />
+                                </div>
 
-                            <div className="w-full space-y-2">
-                                <label>Your Comment</label>
-                                <textarea
-                                    value={comment}
-                                    onChange={(e) => setComment(e.target.value)}
-                                    className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
-                                    placeholder="Example: Loved the post!"
-                                />
-                            </div>
+                                <div className="w-full space-y-2">
+                                    <label>Your Comment</label>
+                                    <textarea
+                                        value={comment}
+                                        onChange={(e) =>
+                                            setComment(e.target.value)
+                                        }
+                                        className="w-full rounded-lg border border-gray-300 p-2 shadow-lg outline-none focus:border-2 focus:border-blue-500"
+                                        placeholder="Example: Loved the post!"
+                                    />
+                                </div>
 
-                            <button
-                                type="submit"
-                                className="w-full rounded-lg bg-blue-500 py-2 font-bold text-white shadow-lg"
-                                onClick={handleCommentSubmit}
-                            >
-                                COMMENT
-                            </button>
-                        </form>
+                                <button
+                                    type="submit"
+                                    className="w-full rounded-lg bg-blue-500 py-2 font-bold text-white shadow-lg"
+                                    onClick={handleCommentSubmit}
+                                >
+                                    COMMENT
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
             </div>

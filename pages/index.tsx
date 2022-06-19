@@ -4,7 +4,6 @@ import BottomNav from '../components/BottomNav'
 import HomePost from '../components/HomePost'
 import { sanityClient } from '../sanity'
 import { HomePostType } from '../typings'
-
 interface Props {
     posts: [HomePostType]
 }

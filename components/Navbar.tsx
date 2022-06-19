@@ -3,9 +3,14 @@ import Avatar from '@mui/material/Avatar'
 import InfoIcon from '@mui/icons-material/Info'
 import CallIcon from '@mui/icons-material/Call'
 import { useRouter } from 'next/router'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth, provider } from '../firebase'
+import { signOut, signInWithPopup } from 'firebase/auth'
 
 export default function Navbar() {
     const router = useRouter()
+
+    const [user] = useAuthState(auth)
 
     return (
         <div className="sticky top-0 z-50 flex w-full items-center justify-between bg-white py-2 px-4 shadow-lg">
@@ -35,9 +40,28 @@ export default function Navbar() {
                     <p className="hidden md:inline-flex">Contact Me</p>
                 </div>
 
-                <div onClick={() => router.push('/login')}>
-                    <Avatar className="cursor-pointer" />
-                </div>
+                {!user ? (
+                    <div
+                        onClick={() => {
+                            signInWithPopup(auth, provider)
+                        }}
+                    >
+                        <button className="cursor-pointer rounded-lg font-semibold text-blue-500">
+                            Log In
+                        </button>
+                    </div>
+                ) : (
+                    <div
+                        onClick={() => {
+                            signOut(auth)
+                        }}
+                    >
+                        <Avatar
+                            className="cursor-pointer"
+                            src={user?.photoURL}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     )

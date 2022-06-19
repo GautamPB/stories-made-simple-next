@@ -51,8 +51,12 @@ const BottomNav = () => {
                 />
 
                 <div className="flex flex-col items-center space-y-3 text-white">
-                    <h1 className="text-4xl font-bold">STORIES MADE SIMPLE</h1>
-                    <h3 className="text-xl">TALES . MYTHS . LEGENDS</h3>
+                    <h1 className="text-2xl font-bold md:text-4xl">
+                        STORIES MADE SIMPLE
+                    </h1>
+                    <h3 className="text-md md:text-xl">
+                        TALES . MYTHS . LEGENDS
+                    </h3>
                 </div>
             </div>
         </div>
