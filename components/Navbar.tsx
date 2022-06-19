@@ -35,7 +35,9 @@ export default function Navbar() {
                     <p className="hidden md:inline-flex">Contact Me</p>
                 </div>
 
-                <Avatar className="cursor-pointer" />
+                <div onClick={() => router.push('/login')}>
+                    <Avatar className="cursor-pointer" />
+                </div>
             </div>
         </div>
     )
