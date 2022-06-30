@@ -20,11 +20,33 @@ export default function Post({ post }: Props) {
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
 
+    const [submitted, setSubmitted] = useState(false)
+
     const { contentType, slug } = router.query
 
     const handleCommentSubmit = (e: any) => {
         e.preventDefault()
-        console.log(name, email, comment)
+
+        const commentData = {
+            _id: post._id,
+            name,
+            email,
+            comment,
+            userPhoto: user?.photoURL,
+        }
+        fetch('/api/createComment', {
+            method: 'POST',
+            body: JSON.stringify(commentData),
+        })
+            .then(() => {
+                setSubmitted(true)
+                setName('')
+                setEmail('')
+                setComment('')
+            })
+            .catch((error) => {
+                console.log('comment could not be submitted', error)
+            })
     }
 
     return (
@@ -101,12 +123,12 @@ export default function Post({ post }: Props) {
                             Liked the post? <br />
                             <span className="text-3xl font-bold text-blue-500">
                                 {user
-                                    ? 'Leave a comment!'
+                                    ? !submitted && 'Leave a comment!'
                                     : 'Login to leave a comment!'}
                             </span>
                         </h1>
 
-                        {user && (
+                        {user && !submitted && (
                             <form className="flex w-full flex-col space-y-3">
                                 <div className="w-full space-y-2">
                                     <label>Your Name</label>
@@ -155,6 +177,11 @@ export default function Post({ post }: Props) {
                                 </button>
                             </form>
                         )}
+                        {submitted && (
+                            <h1 className="text-3xl font-bold text-blue-500">
+                                Thank you for your comment
+                            </h1>
+                        )}
                     </div>
                 </div>
             </div>
@@ -164,8 +191,6 @@ export default function Post({ post }: Props) {
 
 export const getServerSideProps = async (context: { query: any }) => {
     const { contentType, slug } = context.query
-
-    console.log(contentType, slug)
 
     const query = `
     * [_type == '${contentType}'  && slug.current == '${slug}'] {
