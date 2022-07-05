@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import sanityClient from '@sanity/client'
+import { urlFor } from '../../sanity'
 
 const config = {
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',

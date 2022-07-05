@@ -35,7 +35,7 @@ export default {
         {
             name: 'userPhoto',
             title: 'User Photo',
-            type: 'image',
+            type: 'string',
         },
     ],
 }

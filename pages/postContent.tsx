@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
 import Navbar from '../components/Navbar'
 import Head from 'next/head'
-import { sanityClient, urlFor } from '../sanity'
+import { sanityClient } from '../sanity'
 import { HomePostType } from '../typings'
 import PortableText from 'react-portable-text'
 import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase'
+import Comment from '../components/Comment'
 interface Props {
     post: HomePostType
 }
@@ -179,9 +180,19 @@ export default function Post({ post }: Props) {
                         )}
                         {submitted && (
                             <h1 className="text-3xl font-bold text-blue-500">
-                                Thank you for your comment
+                                Thank you for your comment <br />
+                                <span className="text-lg text-black">
+                                    Your comment will be displayed once it's
+                                    approved
+                                </span>
                             </h1>
                         )}
+                    </div>
+
+                    <div className="space-y-4">
+                        {post.comments.map((comment) => (
+                            <Comment comment={comment} />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -203,6 +214,12 @@ export const getServerSideProps = async (context: { query: any }) => {
     name,
     image
   },
+  "comments": *[
+    _type == "comment" &&
+    post._ref == ^._id &&
+    approved == true
+  ]
+,
   description,
   mainImage,
   slug,

@@ -1,3 +1,12 @@
+export interface CommentType {
+    _id: string
+    approved: boolean
+    email: string
+    comment: string
+    name: string
+    userPhoto: string
+}
+
 export interface HomePostType {
     _id: string
     _createdAt: string
@@ -6,6 +15,7 @@ export interface HomePostType {
         name: string
         image: string
     }
+    comments: [CommentType]
     description: string
     mainImage: {
         asset: {
