@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Avatar from '@mui/material/Avatar'
 import InfoIcon from '@mui/icons-material/Info'
-import CallIcon from '@mui/icons-material/Call'
+import AddIcon from '@mui/icons-material/Add'
 import { useRouter } from 'next/router'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, provider } from '../firebase'
@@ -34,10 +34,10 @@ export default function Navbar() {
 
                 <div
                     className="flex cursor-pointer items-center space-x-2"
-                    onClick={() => router.push('/contact')}
+                    onClick={() => router.push('/upload')}
                 >
-                    <CallIcon />
-                    <p className="hidden md:inline-flex">Contact Me</p>
+                    <AddIcon />
+                    <p className="hidden md:inline-flex">Upload New</p>
                 </div>
 
                 {!user ? (
